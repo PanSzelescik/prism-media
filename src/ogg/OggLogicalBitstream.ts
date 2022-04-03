@@ -48,17 +48,18 @@ export interface LogicalBitstreamOptions extends TransformOptions {
 }
 
 // Lazy loaded from node-crc
-let crc: (
-	bits: number,
-	reflection: boolean,
-	expL: number,
-	expH: number,
-	iniL: number,
-	iniH: number,
-	fixL: number,
-	fixH: number,
-	data: Buffer,
-) => Buffer | boolean;
+// let crc: (
+// 	bits: number,
+// 	reflection: boolean,
+// 	expL: number,
+// 	expH: number,
+// 	iniL: number,
+// 	iniH: number,
+// 	fixL: number,
+// 	fixH: number,
+// 	data: Buffer,
+// ) => Buffer | boolean;
+let crc: (bits: number, poly: number, xor_in: number, xor_out: number, reflect: boolean) => (data: Buffer) => number;
 
 /**
  * Transforms an input stream of data into a logical Ogg bitstream that is compliant with the
@@ -84,7 +85,8 @@ export abstract class OggLogicalBitstream extends Transform {
 		this.lacingValues = [];
 
 		if (this.options.crc) {
-			crc = require('node-crc').crc;
+			// crc = require('node-crc').crc;
+			crc = require('polycrc').crc;
 		} else {
 			this.calculateCRC = () => 0;
 		}
@@ -130,11 +132,11 @@ export abstract class OggLogicalBitstream extends Transform {
 	 * @returns The checksum
 	 */
 	protected calculateCRC(buffer: Buffer): number {
-		const value = crc(32, false, 0x04c11db7, 0, 0, 0, 0, 0, buffer);
-		if (typeof value === 'boolean') {
-			throw new Error('Failed to compute CRC for buffer');
-		}
-		return value.readUInt32BE(0);
+		// const value = crc(32, false, 0x04c11db7, 0, 0, 0, 0, 0, buffer);
+		// if (typeof value === 'boolean') {
+		// 	throw new Error('Failed to compute CRC for buffer');
+		// }
+		return crc(32, 0x04c11db7, 0, 0, false)(buffer);
 	}
 
 	/**
