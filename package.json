@@ -1,5 +1,5 @@
 {
-  "name": "prism-media",
+  "name": "@arno500/prism-media",
   "version": "2.0.0-alpha.0",
   "description": "Easy-to-use stream-based media transcoding",
   "main": "dist/index.js",
@@ -102,9 +102,7 @@
     }
   },
   "dependencies": {
-    "duplex-child-process": "^1.0.1"
-  },
-  "peerDependencies": {
+    "duplex-child-process": "^1.0.1",
     "polycrc": "^1.1.0"
   }
 }
