@@ -102,7 +102,7 @@
     }
   },
   "dependencies": {
-    "duplex-child-process": "^1.0.1",
+    "duplex-child-process-issue-13": "github:Ilshidur/duplex-child-process",
     "polycrc": "^1.1.0"
   }
 }

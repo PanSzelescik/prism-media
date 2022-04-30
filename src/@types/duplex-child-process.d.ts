@@ -1,4 +1,4 @@
-declare module 'duplex-child-process' {
+declare module 'duplex-child-process-issue-13' {
 	import { SpawnOptionsWithoutStdio } from 'child_process';
 	import { Duplex } from 'stream';
 

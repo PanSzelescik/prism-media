@@ -1,5 +1,5 @@
 import { SpawnOptionsWithoutStdio } from 'child_process';
-import DuplexChildProcess from 'duplex-child-process';
+import DuplexChildProcess from 'duplex-child-process-issue-13';
 import { DuplexOptions } from 'stream';
 import { findFFmpeg } from './loader';
 
