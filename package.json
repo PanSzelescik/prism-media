@@ -10,7 +10,8 @@
     "lint:fix": "eslint src --ext .ts --fix",
     "prettier": "prettier --write **/*.{ts,js,json,yml,yaml}",
     "build": "tsc",
-    "build:check": "tsc --noEmit --incremental false"
+    "build:check": "tsc --noEmit --incremental false",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
